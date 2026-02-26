@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Community Organization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- React + Router -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    const { BrowserRouter, Routes, Route, Link } = ReactRouterDOM;
+
+    /* ================= LANGUAGE ================= */
+    function detectLanguage() {
+      const lang = navigator.language || navigator.userLanguage;
+      return lang && lang.toLowerCase().startsWith("fr") ? "fr" : "en";
+    }
+
+    const translations = {
+      en: {
+        navHome: "Home",
+        navProjects: "Projects",
+        welcomeTitle: "Welcome to Our Community",
+        welcomeText:
+          "We are a seven-member community organization dedicated to unity, development, and cultural engagement.",
+        aboutTitle: "About Us",
+        aboutText:
+          "Our organization brings together professionals and volunteers committed to social progress, education, and collaboration.",
+        membersTitle: "Our Members",
+        projectsTitle: "Our Projects",
+        contactTitle: "Contact Us",
+        send: "Send Message",
+        roles: [
+          "President",
+          "Vice President",
+          "Secretary",
+          "Treasurer",
+          "Community Outreach",
+          "Youth Coordinator",
+          "Public Relations"
+        ]
+      },
+      fr: {
+        navHome: "Accueil",
+        navProjects: "Projets",
+        welcomeTitle: "Bienvenue dans Notre Communauté",
+        welcomeText:
+          "Nous sommes une organisation communautaire de sept membres dédiée à l’unité, au développement et à l’engagement culturel.",
+        aboutTitle: "À Propos de Nous",
+        aboutText:
+          "Notre organisation rassemble des professionnels et des bénévoles engagés pour le progrès social, l’éducation et la collaboration.",
+        membersTitle: "Nos Membres",
+        projectsTitle: "Nos Projets",
+        contactTitle: "Contactez-Nous",
+        send: "Envoyer le Message",
+        roles: [
+          "Président",
+          "Vice-Président",
+          "Secrétaire",
+          "Trésorier",
+          "Relations Communautaires",
+          "Coordonnateur Jeunesse",
+          "Relations Publiques"
+        ]
+      }
+    };
+
+    /* ================= MEMBERS ================= */
+    const members = [
+      { name: "Member One", img: "members/member1.jpg" },
+      { name: "Member Two", img: "members/member2.jpg" },
+      { name: "Member Three", img: "members/member3.jpg" },
+      { name: "Member Four", img: "members/member4.jpg" },
+      { name: "Member Five", img: "members/member5.jpg" },
+      { name: "Member Six", img: "members/member6.jpg" },
+      { name: "Member Seven", img: "members/member7.jpg" }
+    ];
+
+    /* ================= COMPONENTS ================= */
+    function Header({ lang, setLang, t }) {
+      return (
+        <header className="header">
+          <img src="HB.jpg" className="logo" alt="Logo" />
+          <nav>
+            <Link to="/">{t.navHome}</Link>
+            <Link to="/projects">{t.navProjects}</Link>
+            <button
+              className="lang-btn"
+              onClick={() => setLang(lang === "en" ? "fr" : "en")}
+            >
+              {lang === "en" ? "FR 🇫🇷" : "EN 🇺🇸"}
+            </button>
+          </nav>
+        </header>
+      );
+    }
+
+    function Footer() {
+      return (
+        <footer className="footer">
+          © 2026 Community Organization
+        </footer>
+      );
+    }
+
+    function Home({ t }) {
+      return (
+        <main className="container">
+          <section>
+            <h1>{t.welcomeTitle}</h1>
+            <p>{t.welcomeText}</p>
+          </section>
+
+          <section>
+            <h2>{t.aboutTitle}</h2>
+            <p>{t.aboutText}</p>
+          </section>
+
+          <section>
+            <h2>{t.membersTitle}</h2>
+            <div className="members">
+              {members.map((m, i) => (
+                <div key={i} className="member-card">
+                  <img src={m.img} alt={m.name} />
+                  <h3>{m.name}</h3>
+                  <p>{t.roles[i]}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </main>
+      );
+    }
+
+    function Projects({ t }) {
+      return (
+        <main className="container">
+          <section>
+            <h1>{t.projectsTitle}</h1>
+            <ul>
+              <li>Community Outreach Programs</li>
+              <li>Youth Education Initiatives</li>
+              <li>Cultural & Social Events</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>{t.contactTitle}</h2>
+            <form className="contact-form">
+              <input type="text" placeholder="Name" required />
+              <input type="email" placeholder="Email" required />
+              <textarea rows="4" placeholder="Message"></textarea>
+              <button type="submit">{t.send}</button>
+            </form>
+          </section>
+        </main>
+      );
+    }
+
+    function App() {
+      const [lang, setLang] = React.useState(
+        localStorage.getItem("lang") || detectLanguage()
+      );
+
+      React.useEffect(() => {
+        localStorage.setItem("lang", lang);
+      }, [lang]);
+
+      const t = translations[lang];
+
+      return (
+        <BrowserRouter>
+          <Header lang={lang} setLang={setLang} t={t} />
+          <Routes>
+            <Route path="/" element={<Home t={t} />} />
+            <Route path="/projects" element={<Projects t={t} />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
