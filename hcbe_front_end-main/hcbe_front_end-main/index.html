@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>H.C.B.E Community Organization</title>
+    <meta name="description" content="Community organization website" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a href="#" class="brand" aria-label="Community Organization Home">
+          <img src="logo.png" alt="Community logo" class="brand-logo" />
+        </a>
+        <button
+          id="navToggle"
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="mainNav"
+        >
+          ☰
+        </button>
+        <nav id="mainNav" class="main-nav">
+          <button
+            class="nav-link active"
+            data-page="home"
+            data-en="Home"
+            data-fr="Accueil"
+          >
+            Home
+          </button>
+          <button
+            class="nav-link"
+            data-page="projects"
+            data-en="Projects"
+            data-fr="Projets"
+          >
+            Projects
+          </button>
+          <button
+            class="nav-link"
+            data-page="resources"
+            data-en="Useful Links"
+            data-fr="Liens Utiles"
+          >
+            Useful Links
+          </button>
+          <button
+            class="nav-link contact-link"
+            data-page="contact"
+            data-scroll="contact"
+            data-en="Contact"
+            data-fr="Contact"
+          >
+            Contact
+          </button>
+          <button
+            class="nav-btn nav-btn-primary"
+            data-page="contact"
+            data-en="Contact"
+            data-fr="Contact"
+          >
+            Join Us
+          </button>
+          <!-- <button
+            class="btn btn-secondary"
+            data-page="about"
+            data-scroll="about"
+            data-en="about"
+            data-fr="about"
+          >
+            Learn More
+          </button> -->
+          <button id="langSwitch" class="lang-switch">FR</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="app"></main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <div class="footer-top">
+          <img src="./logo.png" alt="Community logo" class="footer-logo" />
+          <div>
+            <h4 class="follow-us">Follow Us</h4>
+            <a
+              href="https://www.facebook.com/share/1Gnd8hmX4y/?mibextid=wwXIfr"
+              class="footer-social-icon"
+              ><img
+                src="./icons/facebook.png"
+                alt="Community logo"
+                class="footer-logo"
+            /></a>
+            <a href="https://twitter.com/" class="footer-social-icon"
+              ><img
+                src="./icons/x.png"
+                alt="Community logo"
+                class="footer-logo"
+            /></a>
+          </div>
+        </div>
+        <p id="footerText">© 2026 HCBE. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const app = document.getElementById("app");
+        const langSwitch = document.getElementById("langSwitch");
+        const footerText = document.getElementById("footerText");
+        const navToggle = document.getElementById("navToggle");
+        const siteHeader = document.querySelector(".site-header");
+        let lang =
+          localStorage.getItem("lang") ||
+          ((navigator.language || "en").toLowerCase().startsWith("fr")
+            ? "fr"
+            : "en");
+        let currentPage = "home";
+
+        const translations = {
+          en: {
+            navHome: "Home",
+            navProjects: "Projects",
+            navResources: "Useful Links",
+            navContact: "Contact",
+            heroTitle:
+              "High Council of Burkinabe Abroad Zone F. WEST COAST of the U.S.A",
+            heroText: "Serving 12 states:",
+            heroStates:
+              "Arizona • California • Colorado • Hawaii • Idaho • Montana • Nevada • New Mexico • Oregon • Utah • Washington State • Wyoming",
+            heroPrimary: "Join Us",
+            heroSecondary: "Learn More",
+            aboutTitle: "About Us",
+            aboutText:
+              "We are a community organization committed to unity, service, youth empowerment, and cultural celebration across our community.",
+            membersTitle: "Meet Our Members",
+            membersText:
+              "A committed team of fourteen members leading outreach, events, youth initiatives, communications, logistics, and community engagement.",
+            projectsTitle: "Our Projects",
+            resourcesKicker: "Resources",
+            resourcesTitle: "Useful Links",
+            resourcesText:
+              "A one-page resource hub with real external links for community events, learning, public services, volunteering, arts and support services.",
+            contactTitle: "Contact Us",
+            contactText:
+              "We would love to hear from you. Reach out to learn more about events, partnerships, volunteering, or community support.",
+            name: "Name",
+            email: "Email",
+            message: "Message",
+            send: "Send Message",
+            openResource: "Open resource",
+            footer: "© 2026 H.C.B.E. All rights reserved.",
+            roles: [
+              {
+                role: "President",
+                name: "Mr. Ibrahim Coulibaly ",
+              },
+              {
+                role: "Vice President",
+                name: "Mr. Boukare Bance",
+              },
+              {
+                role: "Head of Communication and Mobilization",
+                name: "Mr. Lassane Bonkoungou",
+              },
+              {
+                role: "Information and Technology",
+                name: "Mr. Abdoulaye Ndiaye",
+              },
+              {
+                role: "Mr. Hassami Baga",
+                name: "Treasurer",
+              },
+              {
+                role: "Mr. Daouda Traore",
+                name: "Deputy Treasurer",
+              },
+              {
+                role: "Youth Representative",
+                name: "Mrs. Compaore Awa G",
+              },
+              {
+                role: "Deputy Youth Representative",
+                name: "Mr. Kader Bandaogo",
+              },
+              {
+                role: "Auditor ",
+                name: "Mr. Jacques Barro",
+              },
+              {
+                role: "Deputy Auditor",
+                name: " Mr. Ousseny Zerbo",
+              },
+              {
+                name: "Mr. Hassan Sawadogo",
+                role: "Information and Communication",
+              },
+              {
+                name: "Mrs. Kere Evariste",
+                role: "Rapporteur",
+              },
+              {
+                role: "Women's Representative",
+                name: "Mrs. Malo Justine Catherine",
+              },
+              {
+                role: "Deputy Women's Representative",
+                name: "Mrs. Marleine Flora Karanga",
+              },
+            ],
+            projects: [
+              {
+                icon: "./icons/colabrate.png",
+                title: "Community Outreach",
+                text: "Local support initiatives, community partnerships, and family-centered programs that build lasting connections.",
+              },
+              {
+                icon: "./icons/education.png",
+                title: "Youth Education",
+                text: "Mentoring, tutoring, cultural learning, and activities that encourage growth, confidence, and leadership.",
+              },
+              {
+                icon: "./icons/12431690.png",
+                title: "Faso Mêbo",
+                text: "Celebrations, performances, and public gatherings that highlight heritage, unity, and shared identity.",
+              },
+              {
+                icon: "./icons/colabrate.png",
+                title: "Community Outreach",
+                text: "Local support initiatives, community partnerships, and family-centered programs that build lasting connections.",
+              },
+              {
+                icon: "./icons/education.png",
+                title: "Youth Education",
+                text: "Mentoring, tutoring, cultural learning, and activities that encourage growth, confidence, and leadership.",
+              },
+              {
+                icon: "./icons/12431690.png",
+                title: "Faso Mêbo",
+                text: "Celebrations, performances, and public gatherings that highlight heritage, unity, and shared identity.",
+              },
+            ],
+            resources: [
+              {
+                category: "",
+                title: "Embassy Of Burkina-Faso, Washington DC",
+                text: "See upcoming community and cultural events in Seattle Center’s official calendar.",
+                url: "https://www.seattlecenter.com/events/event-calendar",
+              },
+              {
+                category: "",
+                title: "e-Visas Application",
+                text: "Access free books, classes, online resources, and programs through Seattle Public Library.",
+                url: "https://www.spl.org/",
+              },
+              {
+                category: "",
+                title: "Get an SPL Library Card",
+                text: "Apply online for a free Seattle Public Library card if you live, work, or study in Seattle.",
+                url: "https://www.spl.org/using-the-library/get-started/get-started-in-english/en-get-started-with-a-library-card",
+              },
+              {
+                category: "",
+                title: "Washington Connection",
+                text: "Find and apply for Washington State benefits and services through the official portal.",
+                url: "https://www.washingtonconnection.org/",
+              },
+              {
+                category: "",
+                title: "Public Health – Seattle & King County",
+                text: "Find public health centers, services, programs, and safety information for King County.",
+                url: "https://kingcounty.gov/en/dept/dph",
+              },
+              {
+                category: "",
+                title: "VolunteerMatch Seattle",
+                text: "Browse local volunteer opportunities available in Seattle.",
+                url: "https://www.volunteermatch.org/search?l=Seattle%2C+WA%2C+USA",
+              },
+              {
+                category: "",
+                title: "WA 211",
+                text: "Find housing, food, utility, health, and other support services across Washington.",
+                url: "https://wa211.org/",
+              },
+            ],
+          },
+          fr: {
+            navHome: "Accueil",
+            navProjects: "Projets",
+            navResources: "Liens Utiles",
+            navContact: "Contact",
+            heroTitle:
+              "Haut Conseil des Burkinabe de l'exterieur Zone F. COTE OUEST des Etats-Unis",
+            heroText: "Au service de 12 Etats :",
+            heroStates:
+              "Arizona • Californie • Colorado • Hawaii • Idaho • Montana • Nevada • Nouveau-Mexique • Oregon • Utah • Etat de Washington • Wyoming",
+            heroPrimary: "Nous rejoindre",
+            heroSecondary: "En savoir plus",
+            aboutTitle: "À Propos",
+            aboutText:
+              "Nous sommes une organisation communautaire engagée pour l’unité, le service, la jeunesse et la valorisation culturelle au sein de notre communauté.",
+            membersTitle: "Nos Membres",
+            membersText:
+              "Une équipe de quatorze membres engagés qui dirigent les actions de proximité, les événements, les initiatives jeunesse, la communication, la logistique et l’engagement communautaire.",
+            projectsTitle: "Nos Projets",
+            resourcesKicker: "Ressources",
+            resourcesTitle: "Liens Utiles",
+            resourcesText:
+              "Un espace de ressources avec des liens externes vers des événements communautaires, l’apprentissage, les services publics, le bénévolat, les arts et les services de soutien.",
+            contactTitle: "Contactez-Nous",
+            contactText:
+              "Nous serions ravis d’avoir de vos nouvelles. Contactez-nous pour les événements, les partenariats, le bénévolat ou le soutien communautaire.",
+            name: "Nom",
+            email: "E-mail",
+            message: "Message",
+            send: "Envoyer",
+            openResource: "Ouvrir la ressource",
+            footer: "© 2026 Organisation Communautaire. Tous droits réservés.",
+            roles: [
+              {
+                role: "Président",
+                name: "Mr. Ibrahim Coulibaly ",
+              },
+              {
+                role: "Vice-président",
+                name: "Mr. Boukare Bance",
+              },
+              {
+                role: "Responsable de la communication et de la mobilisation",
+                name: "Mr. Lassane Bonkoungou",
+              },
+              {
+                role: "Informatique et technologie",
+                name: "Mr. Abdoulaye Ndiaye",
+              },
+              {
+                role: "Trésorier",
+                name: "Mr. Hassami Baga",
+              },
+              {
+                role: "Trésorier adjoint",
+                name: "Mr. Daouda Traore",
+              },
+              {
+                role: "Représentante de la jeunesse",
+                name: "Mrs. Compaore Awa G",
+              },
+              {
+                role: "Représentant adjoint de la jeunesse",
+                name: "Mr. Kader Bandaogo",
+              },
+              {
+                role: "Auditeur",
+                name: "Mr. Jacques Barro",
+              },
+              {
+                role: "Auditeur adjoint",
+                name: " Mr. Ousseny Zerbo",
+              },
+              {
+                name: "Mr. Hassan Sawadogo",
+                role: "Information et communication",
+              },
+              {
+                name: "Mrs. Kere Evariste",
+                role: "Rapporteur",
+              },
+              {
+                role: "Représentante des femmes",
+                name: "Mrs. Malo Justine Catherine",
+              },
+              {
+                role: "Représentante adjointe des femmes",
+                name: "Mrs. Marleine Flora Karanga",
+              },
+            ],
+            projects: [
+              {
+                icon: "./icons/colabrate.png",
+                title: "Action Communautaire",
+                text: "Des initiatives locales, des partenariats communautaires et des programmes centrés sur les familles pour créer des liens durables.",
+              },
+              {
+                icon: "./icons/education.png",
+                title: "Éducation des Jeunes",
+                text: "Mentorat, accompagnement scolaire, apprentissage culturel et activités favorisant la croissance et le leadership.",
+              },
+              {
+                icon: "./icons/12431690.png",
+                title: "Événements Culturels",
+                text: "Célébrations, performances et rassemblements publics mettant en valeur l’héritage, l’unité et l’identité commune.",
+              },
+            ],
+            resources: [
+              {
+                category: "",
+                title: "Ambassade du Burkina Faso, Washington DC",
+                text: "Consultez les événements communautaires et culturels à venir dans le calendrier officiel de Seattle Center.",
+                url: "https://www.seattlecenter.com/events/event-calendar",
+              },
+              {
+                category: "",
+                title: "Demande de e-visa",
+                text: "Accédez gratuitement à des livres, des cours, des ressources en ligne et des programmes via la bibliothèque publique de Seattle.",
+                url: "https://www.spl.org/",
+              },
+              {
+                category: "",
+                title: "Obtenir une carte SPL",
+                text: "Faites une demande en ligne pour une carte gratuite de la bibliothèque publique de Seattle si vous vivez, travaillez ou étudiez à Seattle.",
+                url: "https://www.spl.org/using-the-library/get-started/get-started-in-english/en-get-started-with-a-library-card",
+              },
+              {
+                category: "",
+                title: "Washington Connection",
+                text: "Trouvez et demandez les avantages et services de l’État de Washington via le portail officiel.",
+                url: "https://www.washingtonconnection.org/",
+              },
+              {
+                category: "",
+                title: "Santé publique – Seattle & King County",
+                text: "Trouvez les centres de santé publique, services, programmes et informations de sécurité pour King County.",
+                url: "https://kingcounty.gov/en/dept/dph",
+              },
+              {
+                category: "",
+                title: "VolunteerMatch Seattle",
+                text: "Parcourez les opportunités de bénévolat disponibles à Seattle.",
+                url: "https://www.volunteermatch.org/search?l=Seattle%2C+WA%2C+USA",
+              },
+              {
+                category: "",
+                title: "WA 211",
+                text: "Trouvez des services de logement, alimentation, factures, santé et autres soutiens partout dans l’État de Washington.",
+                url: "https://wa211.org/",
+              },
+            ],
+          },
+        };
+
+        const members = Array.from({ length: 14 }, (_, i) => ({
+          name: `Member ${i + 1}`,
+          image: `members/member${i + 1}.svg`,
+        }));
+
+        function memberCards(t) {
+          return members
+            .map(
+              (member, index) => `
+      <article class="member-card">
+        <div class="member-image-wrap">
+          <img src="${member.image}" alt="${member.name}" class="member-image" />
+        </div>
+        <h3>${t.roles[index].name}</h3>
+        <p>${t.roles[index].role || ""}</p>
+      </article>
+    `,
+            )
+            .join("");
+        }
+
+        function projectsCards(t) {
+          return t.projects
+            .map(
+              (project) => `
+      <article class="project-card">
+        <div class="project-icon"><img src="${project.icon}" alt="Project Icon" /></div>
+        <h3>${project.title}</h3>
+        <p>${project.text}</p>
+      </article>
+    `,
+            )
+            .join("");
+        }
+
+        function resourcesCards(t) {
+          return t.resources
+            .map(
+              (resource) => `
+      <article class="resource-card">
+        <div>
+          <p class="resource-category">${resource.category}</p>
+          <h3>${resource.title}</h3>
+          <p class="resource-description">${resource.text}</p>
+          </div>
+          <a class="resource-link" href="${resource.url}" target="_blank" rel="noopener noreferrer">${t.openResource}</a>
+
+      </article>
+    `,
+            )
+            .join("");
+        }
+
+        function renderHome(t) {
+          app.innerHTML = `
+      <section class="hero-section">
+        <div class="shell ">
+          <div class="hero-copy">
+            <h1>${t.heroTitle}</h1>
+            <div class="hero-title">
+            <h3>${t.heroText}</h3>
+            <p>${t.heroStates}</p>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="shell narrow-center">
+          <span class="section-kicker">About</span>
+          <h2>${t.aboutTitle}</h2>
+          <div class="title-accent"></div>
+          <p class="section-text">${t.aboutText}</p>
+        </div>
+      </section>
+
+      <section class="section section-soft">
+        <div class="shell">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Leadership</span>
+              <h2>${t.membersTitle}</h2>
+            </div>
+            <p>${t.membersText}</p>
+          </div>
+          <div class="members-grid">${memberCards(t)}</div>
+        </div>
+      </section>
+    `;
+        }
+
+        function renderProjects(t) {
+          app.innerHTML = `
+      <section class="page-banner">
+        <div class="shell narrow-center">
+          <span class="section-kicker">Community Work</span>
+          <h1>${t.projectsTitle}</h1>
+          <p class="section-text">${t.contactText}</p>
+        </div>
+      </section>
+
+      <section class="section ">
+        <div class="shell projects-section">
+          <div class="project-grid">${projectsCards(t)}</div>
+        </div>
+      </section>
+    `;
+        }
+
+        function renderResources(t) {
+          app.innerHTML = `
+      <section class="page-banner resources-section">
+        <div class="shell narrow-center">
+            <span class="section-kicker">${t.resourcesKicker}</span>
+            <h1>${t.resourcesTitle}</h1>
+            <p class="section-text ">${t.resourcesText}</p>
+         
+        </div>
+      </section>
+       <section class="section">
+        <div class="shell">
+          <div class="resources-grid">${resourcesCards(t)}</div>
+        </div>
+      </section>
+    `;
+        }
+
+        function renderContact(t) {
+          app.innerHTML = `
+      <section class="page-banner">
+        <div class="shell narrow-center">
+          <span class="section-kicker">Get in Touch</span>
+          <h1>${t.contactTitle}</h1>
+          <p class="section-text">${t.contactText}</p>
+        </div>
+      </section>
+
+      <section id="contact" class="section section-soft">
+        <div class="shell contact-grid">
+          <div>
+            <span class="section-kicker">Get in Touch</span>
+            <h2>${t.contactTitle}</h2>
+            <div class="title-accent"></div>
+            <p class="section-text left-text">${t.contactText}</p>
+          </div>
+          <form class="contact-card" onsubmit="event.preventDefault()">
+            <label>
+              <span>${t.name}</span>
+              <input type="text" placeholder="${t.name}" />
+            </label>
+            <label>
+              <span>${t.email}</span>
+              <input type="email" placeholder="${t.email}" />
+            </label>
+            <label class="full-width">
+              <span>${t.message}</span>
+              <textarea rows="5" placeholder="${t.message}"></textarea>
+            </label>
+            <button class="btn btn-primary full-width" type="submit">${t.send}</button>
+          </form>
+        </div>
+      </section>
+    `;
+        }
+
+        function updateNavLabels() {
+          const t = translations[lang];
+          document.querySelectorAll(".nav-link").forEach((btn) => {
+            if (btn.dataset.page === "home") btn.textContent = t.navHome;
+            if (btn.dataset.page === "projects")
+              btn.textContent = t.navProjects;
+            if (btn.dataset.page === "resources")
+              btn.textContent = t.navResources;
+            if (btn.dataset.page === "contact") btn.textContent = t.navContact;
+          });
+          footerText.textContent = t.footer;
+          langSwitch.textContent = lang === "en" ? "FR" : "EN";
+          document.querySelectorAll(".nav-link").forEach((btn) => {
+            btn.classList.toggle("active", btn.dataset.page === currentPage);
+          });
+        }
+
+        function render() {
+          const t = translations[lang];
+          if (currentPage === "projects") renderProjects(t);
+          else if (currentPage === "resources") renderResources(t);
+          else if (currentPage === "contact") renderContact(t);
+          else renderHome(t);
+          updateNavLabels();
+        }
+
+        function bindPageButtons() {
+          if (bindPageButtons.isBound) return;
+
+          document.addEventListener("click", function (event) {
+            const el = event.target.closest("[data-page]");
+            if (!el) return;
+
+            const nextPage = el.dataset.page;
+            currentPage = nextPage === "about" ? "home" : nextPage;
+            render();
+
+            if (siteHeader.classList.contains("menu-open")) {
+              siteHeader.classList.remove("menu-open");
+              navToggle.setAttribute("aria-expanded", "false");
+              navToggle.textContent = "☰";
+            }
+
+            if (el.dataset.scroll) {
+              setTimeout(() => {
+                const target = document.getElementById(el.dataset.scroll);
+                if (target) target.scrollIntoView({ behavior: "smooth" });
+              }, 0);
+            } else {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          });
+
+          bindPageButtons.isBound = true;
+        }
+
+        navToggle.addEventListener("click", function () {
+          const isOpen = siteHeader.classList.toggle("menu-open");
+          navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+          navToggle.textContent = isOpen ? "✕" : "☰";
+        });
+
+        window.addEventListener("resize", function () {
+          if (
+            window.innerWidth > 720 &&
+            siteHeader.classList.contains("menu-open")
+          ) {
+            siteHeader.classList.remove("menu-open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.textContent = "☰";
+          }
+        });
+
+        langSwitch.addEventListener("click", function () {
+          lang = lang === "en" ? "fr" : "en";
+          localStorage.setItem("lang", lang);
+          render();
+        });
+
+        bindPageButtons();
+        render();
+      })();
+    </script>
+  </body>
+</html>
